@@ -6,6 +6,7 @@ package com.bysoftware.cookbook.android;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.EditText;
 
 public class AddRecipeActivity extends AppCompatActivity {
@@ -41,5 +42,14 @@ public class AddRecipeActivity extends AppCompatActivity {
         editTextDirections.setText(prefUtil.getRecipeDirections());
         editTextPreparationTime.setText(prefUtil.getRecipePreparationTime());
 
+    }
+
+    public void addRecipe(View view) {
+        editTextRecipeName.setText("");
+        editTextIngredients.setText("");
+        editTextDirections.setText("");
+        editTextPreparationTime.setText("");
+
+        finish();
     }
 }
