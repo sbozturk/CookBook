@@ -110,6 +110,8 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_slideshow) {
+            Intent intent = new Intent(getApplicationContext(), ShowRecipeActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_manage) {
 

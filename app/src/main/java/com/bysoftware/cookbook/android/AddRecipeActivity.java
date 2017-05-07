@@ -11,10 +11,16 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+
 public class AddRecipeActivity extends AppCompatActivity {
 
     public EditText editTextRecipeName, editTextIngredients, editTextDirections, editTextPreparationTime;
     private PrefUtil prefUtil;
+    public DatabaseReference mDatabase;
+    public String recipeID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,7 @@ public class AddRecipeActivity extends AppCompatActivity {
     }
 
     public void addRecipe(View view) {
+        saveFirebase();
         editTextRecipeName.setText("");
         editTextIngredients.setText("");
         editTextDirections.setText("");
@@ -56,4 +63,20 @@ public class AddRecipeActivity extends AppCompatActivity {
 
         finish();
     }
+
+    public void saveFirebase() {
+        mDatabase = FirebaseDatabase.getInstance().getReference("users");
+
+        //id düzenlenecek
+        recipeID = "123";
+        String recipeName = editTextRecipeName.getText().toString();
+        String recipeIngredients = editTextIngredients.getText().toString();
+        String recipeDirections = editTextDirections.getText().toString();
+        String recipePreparationTime = editTextPreparationTime.getText().toString();
+
+        Recipe recipe = new Recipe(recipeName, recipeIngredients, recipeDirections, recipePreparationTime);
+
+        mDatabase.child(recipeID).setValue(recipe);
+    }
+
 }
