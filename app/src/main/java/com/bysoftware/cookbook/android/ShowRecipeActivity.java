@@ -32,27 +32,20 @@ public class ShowRecipeActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.show_recipe);
 
-
-
         textViewRecipeName = (TextView) findViewById(R.id.textViewRecipeName);
         textViewIngredients = (TextView) findViewById(R.id.textViewIngredients);
         textViewDirections = (TextView) findViewById(R.id.textViewDirections);
         textViewPreparationTime = (TextView) findViewById(R.id.textViewPreparationTime);
 
         reloadFirebase();
-
-
     }
 
     public void reloadFirebase (){
         mDatabase = FirebaseDatabase.getInstance().getReference("users");
-
         mDatabase.child("123").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Recipe recipe = dataSnapshot.getValue(Recipe.class);
-
-
 
                 textViewRecipeName.setText(recipe.getRecipeName());
                 textViewIngredients.setText(recipe.getRecipeIngredients());
@@ -60,7 +53,6 @@ public class ShowRecipeActivity extends AppCompatActivity {
                 textViewPreparationTime.setText(recipe.getRecipePreparationTime());
 
                 Log.d(TAG, "User name: " + recipe.getRecipePreparationTime());
-
             }
 
             @Override
