@@ -8,4 +8,8 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_add_recipe">AddRecipe</string>
     <string name="title_activity_show_recipe">ShowRecipe</string>
+
+
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
 </resources>
