@@ -100,6 +100,12 @@ public class AddRecipeActivity extends AppCompatActivity {
 
         recipeID = mDatabase.push().getKey();
         String recipeName = editTextRecipeName.getText().toString();
+        //lowercase to uppercase
+        if (recipeName.length() <= 1) {
+            recipeName = recipeName.toUpperCase();
+        } else {
+            recipeName = recipeName.substring(0, 1).toUpperCase() + recipeName.substring(1);
+        }
         String recipeIngredients = editTextIngredients.getText().toString();
         String recipeDirections = editTextDirections.getText().toString();
         String recipePreparationTime = editTextPreparationTime.getText().toString();
