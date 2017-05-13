@@ -95,10 +95,10 @@ public class AddRecipeActivity extends AppCompatActivity {
     }
 
     public void saveFirebase() {
-        mDatabase = FirebaseDatabase.getInstance().getReference("users");
+        mDatabase = FirebaseDatabase.getInstance().getReference("recipes");
 
-        //id düzenlenecek
-        recipeID = "123";
+
+        recipeID = mDatabase.push().getKey();
         String recipeName = editTextRecipeName.getText().toString();
         String recipeIngredients = editTextIngredients.getText().toString();
         String recipeDirections = editTextDirections.getText().toString();
