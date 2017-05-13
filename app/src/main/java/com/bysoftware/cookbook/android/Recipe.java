@@ -9,16 +9,18 @@ public class Recipe {
     public String recipeIngredients;
     public String recipeDirections;
     public String recipePreparationTime;
+    public String recipeOrigin;
 
     public Recipe() {
 
     }
 
-    public Recipe(String recipeName, String recipeIngredients, String recipeDirections, String recipePreparationTime) {
+    public Recipe(String recipeName, String recipeIngredients, String recipeDirections, String recipePreparationTime, String recipeOrigin) {
         this.recipeName = recipeName;
         this.recipeIngredients = recipeIngredients;
         this.recipeDirections = recipeDirections;
         this.recipePreparationTime = recipePreparationTime;
+        this.recipeOrigin = recipeOrigin;
 
     }
 
@@ -52,5 +54,13 @@ public class Recipe {
 
     public void setRecipePreparationTime(String recipePreparationTime) {
         this.recipePreparationTime = recipePreparationTime;
+    }
+
+    public String getRecipeOrigin() {
+        return recipeOrigin;
+    }
+
+    public void setRecipeOrigin(String recipeOrigin) {
+        this.recipeOrigin = recipeOrigin;
     }
 }

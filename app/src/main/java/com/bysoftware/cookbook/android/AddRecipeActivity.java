@@ -27,7 +27,7 @@ public class AddRecipeActivity extends AppCompatActivity {
     private PrefUtil prefUtil;
     public DatabaseReference mDatabase;
     public String recipeID;
-    private Spinner country;
+    private Spinner spinnerCountry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,13 @@ public class AddRecipeActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.add_recipe);
 
-        country = (Spinner) findViewById(R.id.spinnerCountry);
+        prefUtil = new PrefUtil(this);
+
+        editTextRecipeName = (EditText) findViewById(R.id.editTextRecipeName);
+        editTextIngredients = (EditText) findViewById(R.id.editTextIngredients);
+        editTextDirections = (EditText) findViewById(R.id.editTextDirections);
+        editTextPreparationTime = (EditText) findViewById(R.id.editTextPreparationTime);
+        spinnerCountry = (Spinner) findViewById(R.id.spinnerCountry);
 
         Locale[] locales = Locale.getAvailableLocales();
         ArrayList<String> countries = new ArrayList<String>();
@@ -57,14 +63,8 @@ public class AddRecipeActivity extends AppCompatActivity {
         dataAdapter
                 .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // set the ArrayAdapter to the spinner
-        country.setAdapter(dataAdapter);
+        spinnerCountry.setAdapter(dataAdapter);
 
-        prefUtil = new PrefUtil(this);
-
-        editTextRecipeName = (EditText) findViewById(R.id.editTextRecipeName);
-        editTextIngredients = (EditText) findViewById(R.id.editTextIngredients);
-        editTextDirections = (EditText) findViewById(R.id.editTextDirections);
-        editTextPreparationTime = (EditText) findViewById(R.id.editTextPreparationTime);
         showSavedPreferences();
 
     }
@@ -103,8 +103,9 @@ public class AddRecipeActivity extends AppCompatActivity {
         String recipeIngredients = editTextIngredients.getText().toString();
         String recipeDirections = editTextDirections.getText().toString();
         String recipePreparationTime = editTextPreparationTime.getText().toString();
+        String recipeOrigin = spinnerCountry.getSelectedItem().toString();
 
-        Recipe recipe = new Recipe(recipeName, recipeIngredients, recipeDirections, recipePreparationTime);
+        Recipe recipe = new Recipe(recipeName, recipeIngredients, recipeDirections, recipePreparationTime, recipeOrigin);
 
         mDatabase.child(recipeID).setValue(recipe);
     }
