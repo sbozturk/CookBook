@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.firebase.database.DatabaseReference;
@@ -17,10 +18,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class AddRecipeActivity extends AppCompatActivity {
 
-    public EditText editTextRecipeName, editTextIngredients, editTextDirections, editTextPreparationTime;
+    private EditText editTextRecipeName, editTextIngredients, editTextDirections, editTextPreparationTime;
     private PrefUtil prefUtil;
-    public DatabaseReference mDatabase;
-    public String recipeID;
+    FirebaseDBUtil firebaseDBUtil;
+
+    private Button buttonSave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +33,22 @@ public class AddRecipeActivity extends AppCompatActivity {
 
         prefUtil = new PrefUtil(this);
 
+        buttonSave = (Button) findViewById(R.id.buttonSave);
         editTextRecipeName = (EditText) findViewById(R.id.editTextRecipeName);
         editTextIngredients = (EditText) findViewById(R.id.editTextIngredients);
         editTextDirections = (EditText) findViewById(R.id.editTextDirections);
         editTextPreparationTime = (EditText) findViewById(R.id.editTextPreparationTime);
         showSavedPreferences();
 
+        buttonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                firebaseDBUtil.addRecipe(editTextRecipeName.getText().toString(),
+                        editTextIngredients.getText().toString(),
+                        editTextDirections.getText().toString(),
+                        editTextPreparationTime.getText().toString());
+            }
+        });
     }
 
     @Override
@@ -51,32 +63,5 @@ public class AddRecipeActivity extends AppCompatActivity {
         editTextIngredients.setText(prefUtil.getRecipeIngredients());
         editTextDirections.setText(prefUtil.getRecipeDirections());
         editTextPreparationTime.setText(prefUtil.getRecipePreparationTime());
-
     }
-
-    public void addRecipe(View view) {
-        saveFirebase();
-        editTextRecipeName.setText("");
-        editTextIngredients.setText("");
-        editTextDirections.setText("");
-        editTextPreparationTime.setText("");
-
-        finish();
-    }
-
-    public void saveFirebase() {
-        mDatabase = FirebaseDatabase.getInstance().getReference("users");
-
-        //id düzenlenecek
-        recipeID = "123";
-        String recipeName = editTextRecipeName.getText().toString();
-        String recipeIngredients = editTextIngredients.getText().toString();
-        String recipeDirections = editTextDirections.getText().toString();
-        String recipePreparationTime = editTextPreparationTime.getText().toString();
-
-        Recipe recipe = new Recipe(recipeName, recipeIngredients, recipeDirections, recipePreparationTime);
-
-        mDatabase.child(recipeID).setValue(recipe);
-    }
-
 }

@@ -9,13 +9,13 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class FirebaseDBUtil {
 
-    String recipeName;
-    String recipeIngredients;
-    String recipeDirections;
-    String recipePreparationTime;
+    private String recipeName;
+    private String recipeIngredients;
+    private String recipeDirections;
+    private String recipePreparationTime;
 
-    FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
-    DatabaseReference mDatabaseReference = mFirebaseDatabase.getReference("recipes");
+    private FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference mDatabaseReference = mFirebaseDatabase.getReference("recipes");
 
     public void addRecipe(String recipeName, String recipeIngredients, String recipeDirections, String recipePreparationTime){
         this.recipeName = recipeName;
@@ -29,6 +29,4 @@ public class FirebaseDBUtil {
 
         mDatabaseReference.child(recipeId).setValue(recipe);
     }
-
-
 }

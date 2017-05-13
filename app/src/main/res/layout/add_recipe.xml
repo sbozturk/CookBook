@@ -40,11 +40,10 @@
         android:inputType="number" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#2ac619"
-        android:onClick="addRecipe"
         android:text="SAVE"
         android:textAlignment="center"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
