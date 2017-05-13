@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Yemek Kitabı</string>
+    <string name="action_settings">Ayarlar</string>
+    <string name="communicate">İletişim</string>
+    <string name="directions">Tarif</string>
+    <string name="hello">Merhaba Dünya!</string>
+    <string name="home">Ana Sayfa</string>
+    <string name="ingredients">Malzemeler</string>
+    <string name="map">Harita</string>
+    <string name="prep">Zaman</string>
+    <string name="preparationTime">Hazırlama Süresi</string>
+    <string name="recipeName">Tarif İsmi</string>
+    <string name="saveButton">Kaydet</string>
+    <string name="send">Gönder</string>
+    <string name="share">Paylaş</string>
+    <string name="sign_in">Oturum Aç</string>
+    <string name="sign_up">Kaydol</string>
+    <string name="slideshow">Slayt</string>
+    <string name="title_activity_add_recipe">Tarif Ekle</string>
+    <string name="title_activity_maps">Harita</string>
+    <string name="title_activity_show_recipe">Tarifi Göster</string>
+    <string name="tools">Araçlar</string>
+    <string name="origin">Tarifin Kökeni</string>
+</resources>
