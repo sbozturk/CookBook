@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Recipe Name"
+        android:hint="@string/recipeName"
         android:inputType="textPersonName" />
 
     <EditText
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Ingredients"
+        android:hint="@string/ingredients"
         android:inputType="textMultiLine" />
 
     <EditText
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Directions"
+        android:hint="@string/directions"
         android:inputType="textMultiLine" />
 
     <EditText
@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Preparation Time"
+        android:hint="@string/preparationTime"
         android:inputType="number" />
 
     <TextView
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:paddingLeft="5dp"
-        android:text="Origin of Recipe:"
+        android:text="@string/origin"
         android:textSize="18sp" />
 
     <Spinner
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:background="#2ac619"
         android:onClick="addRecipe"
-        android:text="SAVE"
+        android:text="@string/saveButton"
         android:textAlignment="center"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
         android:textSize="16sp"

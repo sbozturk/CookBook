@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Recipe Name"
+                android:text="@string/recipeName"
                 android:textStyle="bold" />
 
             <TextView
@@ -56,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Prep"
+                android:text="@string/prep"
                 android:textStyle="bold" />
 
             <TextView
@@ -78,7 +78,7 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Ingredients"
+        android:text="@string/ingredients"
         android:textStyle="bold" />
 
     <TextView
@@ -94,7 +94,7 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Directions"
+        android:text="@string/directions"
         android:textStyle="bold" />
 
     <TextView
