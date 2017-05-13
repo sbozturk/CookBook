@@ -3,10 +3,13 @@ package com.bysoftware.cookbook.android;
 import android.*;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,8 +22,18 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +65,42 @@ public class MainActivity extends AppCompatActivity
         if (!checkIfAlreadyHavePermission()) {
             requestForSpecificPermission();
         }
+        //adapter
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        new GetDataFromFirebase().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+        // Read from the database
+        FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = mDatabase.getReference("recipes");
+
+
+
+        myRef.orderByChild("recipeName").addValueEventListener(new ValueEventListener() {
+
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot)
+            {
+
+
+                ArrayList<String> lst = new ArrayList<String>();
+                for(DataSnapshot dsp : dataSnapshot.getChildren()){
+                    lst.add(String.valueOf(dsp.child("recipeName").getValue())); //add result into array list
+                }
+                recyclerView.setAdapter(new RecyclerViewAdapter(lst));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Failed to read value." + databaseError.toException());
+            }
+        });
+
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -97,15 +145,6 @@ public class MainActivity extends AppCompatActivity
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
 
-            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(getApplicationContext(), AddRecipeActivity.class);
-                    startActivity(intent);
-                }
-            });
-
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                     this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -114,6 +153,45 @@ public class MainActivity extends AppCompatActivity
 
             NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
             navigationView.setNavigationItemSelectedListener(this);
+
+            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getApplicationContext(), AddRecipeActivity.class);
+                    startActivity(intent);
+                }
+            });
+            //adapter
+            recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            new GetDataFromFirebase().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+            // Read from the database
+            FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = mDatabase.getReference("recipes");
+            myRef.orderByChild("recipeName").addValueEventListener(new ValueEventListener() {
+
+
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
+
+
+                    ArrayList<String> lst = new ArrayList<String>();
+                    for(DataSnapshot dsp : dataSnapshot.getChildren()){
+                        lst.add(String.valueOf(dsp.child("recipeName").getValue())); //add result into array list
+                    }
+                    recyclerView.setAdapter(new RecyclerViewAdapter(lst));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    System.out.println("Failed to read value." + databaseError.toException());
+                }
+            });
+
         } else if (id == R.id.nav_map) {
             Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
             startActivity(intent);
@@ -132,6 +210,23 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    private class GetDataFromFirebase extends AsyncTask<Void,Void,Boolean> {
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            return false;
+        }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+        }
     }
 
     private boolean checkIfAlreadyHavePermission() {
