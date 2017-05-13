@@ -4,6 +4,6 @@
     android:id="@+id/recycler_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
-    tools:context="com.bysoftware.cookbook.android.MainActivity">
-</android.support.v7.widget.RecyclerView>
+    android:background="#FF9100"
+    android:paddingTop="60dp"
+    tools:context="com.bysoftware.cookbook.android.MainActivity"></android.support.v7.widget.RecyclerView>
