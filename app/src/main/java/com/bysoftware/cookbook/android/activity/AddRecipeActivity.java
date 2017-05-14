@@ -1,4 +1,4 @@
-package com.bysoftware.cookbook.android;
+package com.bysoftware.cookbook.android.activity;
 
 /**
  * Created by sbozturk on 6.5.2017.
@@ -13,6 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.bysoftware.cookbook.android.util.PrefUtil;
+import com.bysoftware.cookbook.android.R;
+import com.bysoftware.cookbook.android.model.Recipe;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 

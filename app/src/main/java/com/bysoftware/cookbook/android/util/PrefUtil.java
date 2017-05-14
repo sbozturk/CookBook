@@ -1,4 +1,4 @@
-package com.bysoftware.cookbook.android;
+package com.bysoftware.cookbook.android.util;
 
 /**
  * Created by sbozturk on 6.5.2017.

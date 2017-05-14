@@ -1,10 +1,11 @@
-package com.bysoftware.cookbook.android;
+package com.bysoftware.cookbook.android.activity;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.bysoftware.cookbook.android.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;

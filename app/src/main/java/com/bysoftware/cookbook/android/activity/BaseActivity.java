@@ -1,6 +1,9 @@
-package com.bysoftware.cookbook.android;
+package com.bysoftware.cookbook.android.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -12,6 +15,14 @@ import com.google.firebase.auth.FirebaseAuth;
 public class BaseActivity extends AppCompatActivity {
 
     private ProgressDialog mProgressDialog;
+    protected Context mContext;
+
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mContext = BaseActivity.this;
+    }
 
     public void showProgressDialog() {
         if (mProgressDialog == null) {

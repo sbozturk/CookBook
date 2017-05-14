@@ -1,4 +1,4 @@
-package com.bysoftware.cookbook.android;
+package com.bysoftware.cookbook.android.model;
 
 /**
  * Created by bugra on 7.5.2017.

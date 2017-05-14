@@ -8,6 +8,8 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_add_recipe">Add Recipe</string>
     <string name="title_activity_show_recipe">Show Recipe</string>
+    <string name="title_activity_base">Base</string>
+    <string name="title_activity_sign_in">Sign In</string>
 
 
     <string name="sign_in">Sign In</string>

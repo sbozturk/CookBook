@@ -1,4 +1,4 @@
-package com.bysoftware.cookbook.android;
+package com.bysoftware.cookbook.android.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.bysoftware.cookbook.android.R;
+import com.bysoftware.cookbook.android.model.Recipe;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,7 +25,6 @@ public class ShowRecipeActivity extends AppCompatActivity {
 
     public TextView textViewRecipeName, textViewIngredients, textViewDirections, textViewPreparationTime;
     public DatabaseReference mDatabase;
-    public String recipeID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +42,11 @@ public class ShowRecipeActivity extends AppCompatActivity {
     }
 
     public void reloadFirebase (){
-        mDatabase = FirebaseDatabase.getInstance().getReference("users");
-        mDatabase.child("123").addValueEventListener(new ValueEventListener() {
+
+        //TODO: Buraları düzelt
+
+        mDatabase = FirebaseDatabase.getInstance().getReference("recipes");
+        mDatabase.child("-Kk1RZEtK2axhEk-WLnb").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Recipe recipe = dataSnapshot.getValue(Recipe.class);
