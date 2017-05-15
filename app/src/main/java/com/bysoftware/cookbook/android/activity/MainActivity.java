@@ -63,9 +63,16 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //location permisson check
         if (!checkIfAlreadyHavePermission()) {
             requestForSpecificPermission();
         }
+
+        createAdapter();
+
+    }
+
+    public void createAdapter(){
         //adapter
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -98,7 +105,6 @@ public class MainActivity extends AppCompatActivity
                 System.out.println("Failed to read value." + databaseError.toException());
             }
         });
-
     }
 
 
