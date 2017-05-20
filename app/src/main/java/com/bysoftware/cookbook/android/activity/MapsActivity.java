@@ -49,9 +49,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         double latitude = Double.parseDouble(String.valueOf(dsp.child("latitude").getValue()));
                         double longitude = Double.parseDouble(String.valueOf(dsp.child("longitude").getValue()));
+                        String recipeName = String.valueOf(dsp.child("recipeName").getValue());
                         LatLng recipe = new LatLng(latitude, longitude);
-                        mMap.addMarker(new MarkerOptions().position(recipe).title(""));
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(recipe, 18));
+                        mMap.addMarker(new MarkerOptions().position(recipe).title(recipeName));
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(recipe, 1));
                     }
                 } else {
                     Log.e("TAG", "onDataChange: No data");
