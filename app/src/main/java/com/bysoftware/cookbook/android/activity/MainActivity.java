@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //location permisson check
+        //location permission check
         if (!checkIfAlreadyHavePermission()) {
             requestForSpecificPermission();
         }
