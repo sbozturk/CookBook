@@ -105,8 +105,7 @@ public class AddRecipeActivity extends AppCompatActivity {
         editTextIngredients.setText("");
         editTextDirections.setText("");
         editTextPreparationTime.setText("");
-        String toastRecipe = getResources().getString(R.string.toastRecipe);
-        Toast.makeText(getApplicationContext(), toastRecipe, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.toastRecipe), Toast.LENGTH_SHORT).show();
 
         finish();
     }
