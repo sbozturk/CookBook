@@ -4,24 +4,36 @@ package com.bysoftware.cookbook.android.activity;
  * Created by sbozturk on 6.5.2017.
  */
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.bysoftware.cookbook.android.util.PrefUtil;
 import com.bysoftware.cookbook.android.R;
 import com.bysoftware.cookbook.android.model.Recipe;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
+
+import static android.R.attr.value;
 
 
 public class AddRecipeActivity extends AppCompatActivity {
@@ -98,9 +110,14 @@ public class AddRecipeActivity extends AppCompatActivity {
     }
 
     public void saveFirebase() {
+        //location value
+        TrackGPS trackGPS = new TrackGPS(AddRecipeActivity.this);
+        double latitude = trackGPS .getLatitude();
+        double longitude = trackGPS.getLongitude();
+
+        Toast.makeText(getApplicationContext(),"Longitude:"+Double.toString(longitude)+"\nLatitude:"+Double.toString(latitude),Toast.LENGTH_SHORT).show();
+
         mDatabase = FirebaseDatabase.getInstance().getReference("recipes");
-
-
         recipeID = mDatabase.push().getKey();
         String recipeName = editTextRecipeName.getText().toString();
         //lowercase to uppercase
@@ -114,9 +131,8 @@ public class AddRecipeActivity extends AppCompatActivity {
         String recipePreparationTime = editTextPreparationTime.getText().toString();
         String recipeOrigin = spinnerCountry.getSelectedItem().toString();
 
-        Recipe recipe = new Recipe(recipeName, recipeIngredients, recipeDirections, recipePreparationTime, recipeOrigin);
+        Recipe recipe = new Recipe(recipeName, recipeIngredients, recipeDirections, recipePreparationTime, recipeOrigin, longitude, latitude);
 
         mDatabase.child(recipeID).setValue(recipe);
     }
-
 }

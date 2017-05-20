@@ -10,18 +10,21 @@ public class Recipe {
     public String recipeDirections;
     public String recipePreparationTime;
     public String recipeOrigin;
+    public Double longitude;
+    public Double latitude;
 
     public Recipe() {
 
     }
 
-    public Recipe(String recipeName, String recipeIngredients, String recipeDirections, String recipePreparationTime, String recipeOrigin) {
+    public Recipe(String recipeName, String recipeIngredients, String recipeDirections, String recipePreparationTime, String recipeOrigin, Double longitude, Double latitude) {
         this.recipeName = recipeName;
         this.recipeIngredients = recipeIngredients;
         this.recipeDirections = recipeDirections;
         this.recipePreparationTime = recipePreparationTime;
         this.recipeOrigin = recipeOrigin;
-
+        this.longitude = longitude;
+        this.latitude = latitude;
     }
 
     public String getRecipeName() {
@@ -62,5 +65,21 @@ public class Recipe {
 
     public void setRecipeOrigin(String recipeOrigin) {
         this.recipeOrigin = recipeOrigin;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 }
