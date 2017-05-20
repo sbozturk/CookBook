@@ -56,8 +56,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        // Set default username is anonymous.
-        mUsername = ANONYMOUS;
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +80,8 @@ public class MainActivity extends AppCompatActivity
             requestForSpecificPermission();
         }
 
-        checkLogin();
+        //TODO: Düzelt burayı
+        //checkLogin();
 
         createAdapter();
     }
