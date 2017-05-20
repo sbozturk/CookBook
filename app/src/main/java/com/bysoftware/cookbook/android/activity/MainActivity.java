@@ -1,9 +1,11 @@
 package com.bysoftware.cookbook.android.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -23,6 +25,8 @@ import android.view.WindowManager;
 
 import com.bysoftware.cookbook.android.R;
 import com.bysoftware.cookbook.android.adapter.RecyclerViewAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +38,14 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static final String ANONYMOUS = "anonymous";
+
     private RecyclerView recyclerView;
+    private SharedPreferences mSharedPreferences;
+    private String mUsername;
+    // Firebase instance variables
+    private FirebaseAuth mFirebaseAuth;
+    private FirebaseUser mFirebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +55,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(com.bysoftware.cookbook.android.R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        // Set default username is anonymous.
+        mUsername = ANONYMOUS;
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -68,8 +82,23 @@ public class MainActivity extends AppCompatActivity
             requestForSpecificPermission();
         }
 
-        createAdapter();
+        checkLogin();
 
+        createAdapter();
+    }
+
+    public void checkLogin(){
+        // Initialize Firebase Auth
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = mFirebaseAuth.getCurrentUser();
+        if (mFirebaseUser == null) {
+            // Not signed in, launch the Sign In activity
+            startActivity(new Intent(this, SignInActivity.class));
+            finish();
+            return;
+        } else {
+            mUsername = mFirebaseUser.getDisplayName();
+        }
     }
 
     public void createAdapter(){

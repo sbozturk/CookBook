@@ -50,9 +50,6 @@
             android:name=".activity.ShowRecipeActivity"
             android:label="@string/title_activity_show_recipe" />
         <activity
-            android:name=".activity.BaseActivity"
-            android:label="@string/title_activity_base" />
-        <activity
             android:name=".activity.SignInActivity"
             android:label="@string/title_activity_sign_in" />
     </application>
