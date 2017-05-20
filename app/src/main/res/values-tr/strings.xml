@@ -22,4 +22,5 @@
     <string name="title_activity_show_recipe">Tarifi Göster</string>
     <string name="tools">Araçlar</string>
     <string name="origin">Tarifin Kökeni</string>
+    <string name="toastRecipe">Tarifiniz kaydedildi.</string>
 </resources>
