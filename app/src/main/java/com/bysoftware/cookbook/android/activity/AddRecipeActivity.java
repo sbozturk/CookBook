@@ -105,6 +105,8 @@ public class AddRecipeActivity extends AppCompatActivity {
         editTextIngredients.setText("");
         editTextDirections.setText("");
         editTextPreparationTime.setText("");
+        String toastRecipe = getResources().getString(R.string.toastRecipe);
+        Toast.makeText(getApplicationContext(), toastRecipe, Toast.LENGTH_SHORT).show();
 
         finish();
     }
@@ -112,10 +114,9 @@ public class AddRecipeActivity extends AppCompatActivity {
     public void saveFirebase() {
         //location value
         TrackGPS trackGPS = new TrackGPS(AddRecipeActivity.this);
-        double latitude = trackGPS .getLatitude();
+        double latitude = trackGPS.getLatitude();
         double longitude = trackGPS.getLongitude();
 
-        Toast.makeText(getApplicationContext(),"Longitude:"+Double.toString(longitude)+"\nLatitude:"+Double.toString(latitude),Toast.LENGTH_SHORT).show();
 
         mDatabase = FirebaseDatabase.getInstance().getReference("recipes");
         recipeID = mDatabase.push().getKey();
