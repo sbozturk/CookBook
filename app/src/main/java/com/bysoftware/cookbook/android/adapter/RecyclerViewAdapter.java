@@ -1,6 +1,7 @@
 package com.bysoftware.cookbook.android.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,14 +42,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         //If you are ok with returning 0 as size when values is null. We can add this code instead of "return values.size();"
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        private String mItem;
         private TextView name;
 
         ViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.list_item_text);
         }
+
+        public void setItem(String item) {
+            mItem = item;
+            name.setText(item);
+        }
     }
-
-
+    
 }
