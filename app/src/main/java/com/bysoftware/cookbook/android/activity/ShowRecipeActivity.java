@@ -46,7 +46,7 @@ public class ShowRecipeActivity extends AppCompatActivity {
         //TODO: Buraları düzelt
 
         mDatabase = FirebaseDatabase.getInstance().getReference("recipes");
-        mDatabase.child("-Kk1RZEtK2axhEk-WLnb").addValueEventListener(new ValueEventListener() {
+        mDatabase.child("-KkaCd3-dLp7gq3GfYXl").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Recipe recipe = dataSnapshot.getValue(Recipe.class);
