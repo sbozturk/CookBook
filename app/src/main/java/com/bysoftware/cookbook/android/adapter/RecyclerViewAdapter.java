@@ -18,7 +18,6 @@ import java.util.ArrayList;
  * Created by bugra on 13.5.2017.
  */
 
-
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private ArrayList<String> recipes = null;
@@ -32,18 +31,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_item, parent, false));
     }
 
-
     @Override
-    public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
-        holder.name.setText(recipes.get(position));
+    public void onBindViewHolder(final RecyclerViewAdapter.ViewHolder holder, final int position) {
+        holder.name.setText(recipes.get(position * 2));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                MainActivity mainActivity = new MainActivity();
-                mainActivity.createAdapter();
-
+                String recipeID = (String) recipes.get((position * 2) + 1);
                 Intent Intent = new Intent(view.getContext(), ShowRecipeActivity.class);
+                Intent.putExtra("key", recipeID);
                 view.getContext().startActivity(Intent);
             }
         });
@@ -51,18 +49,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public int getItemCount() {
-        return (recipes == null) ? 0 : recipes.size();
-
-        //If you are ok with returning 0 as size when values is null. We can add this code instead of "return values.size();"
+        int halfCountOfList = recipes.size() / 2;
+        int finalCount = halfCountOfList + recipes.size() % 2;
+        return finalCount;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private String mItem;
-        private TextView name;
+        private TextView name, key;
 
         ViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.list_item_text);
+
         }
 
         public void setItem(String item) {
@@ -70,5 +69,4 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             name.setText(item);
         }
     }
-
 }
