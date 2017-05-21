@@ -26,7 +26,7 @@ import static android.content.ContentValues.TAG;
 
 public class ShowRecipeActivity extends AppCompatActivity {
 
-    public TextView textViewRecipeName, textViewIngredients, textViewDirections, textViewPreparationTime;
+    public TextView textViewRecipeName, textViewIngredients, textViewDirections, textViewPreparationTime, textViewOrigin;
     public DatabaseReference mDatabase;
 
     @Override
@@ -40,6 +40,7 @@ public class ShowRecipeActivity extends AppCompatActivity {
         textViewIngredients = (TextView) findViewById(R.id.textViewIngredients);
         textViewDirections = (TextView) findViewById(R.id.textViewDirections);
         textViewPreparationTime = (TextView) findViewById(R.id.textViewPreparationTime);
+        textViewOrigin = (TextView) findViewById(R.id.textViewOrigin);
 
         reloadFirebase();
     }
@@ -58,6 +59,7 @@ public class ShowRecipeActivity extends AppCompatActivity {
                 textViewIngredients.setText(recipe.getRecipeIngredients());
                 textViewDirections.setText(recipe.getRecipeDirections());
                 textViewPreparationTime.setText(recipe.getRecipePreparationTime());
+                textViewOrigin.setText(recipe.getRecipeOrigin());
 
                 Log.d(TAG, "User name: " + recipe.getRecipePreparationTime());
             }

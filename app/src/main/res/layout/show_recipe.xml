@@ -1,108 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/recipebook"
-    android:gravity="center"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/recipebook">
 
     <LinearLayout
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+
+        android:orientation="vertical"
+        android:paddingBottom="50dp"
+        android:paddingTop="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/titleRecipeName"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/recipeName"
-                android:textStyle="bold" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textViewRecipeName"
+                <TextView
+                    android:id="@+id/titleRecipeName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="5dp"
+                    android:text="@string/recipeName"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewRecipeName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageViewPrepTimer"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:paddingLeft="5dp"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/titlePreparationTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="5dp"
+                    android:text="@string/prep"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textViewPreparationTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imageViewPrepTimer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            app:srcCompat="@android:drawable/ic_lock_idle_alarm" />
+        <TextView
+            android:id="@+id/titleOrigin"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="5dp"
+            android:text="@string/origin"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:orientation="vertical">
+        <TextView
+            android:id="@+id/textViewOrigin"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="10dp"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/titlePreparationTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/prep"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/titleIngredients"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="5dp"
+            android:text="@string/ingredients"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/textViewPreparationTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:paddingLeft="5dp"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/textViewIngredients"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="10dp"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="18sp" />
 
-        </LinearLayout>
+        <TextView
+            android:id="@+id/titleDirections"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="5dp"
+            android:text="@string/directions"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewDirections"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="10dp"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="18sp" />
+
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/titleIngredients"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/ingredients"
-        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textViewIngredients"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:paddingLeft="5dp"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/titleDirections"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/directions"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/textViewDirections"
-        android:layout_width="280dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:paddingLeft="5dp"
-        android:textSize="16sp" />
-
-</LinearLayout>
+</ScrollView>
