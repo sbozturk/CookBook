@@ -1,5 +1,6 @@
 package com.bysoftware.cookbook.android.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bysoftware.cookbook.android.R;
+import com.bysoftware.cookbook.android.activity.MainActivity;
+import com.bysoftware.cookbook.android.activity.ShowRecipeActivity;
 
 import java.util.ArrayList;
 
@@ -33,6 +36,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(RecyclerViewAdapter.ViewHolder holder, int position) {
         holder.name.setText(recipes.get(position));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity mainActivity = new MainActivity();
+                mainActivity.createAdapter();
+
+                Intent Intent = new Intent(view.getContext(), ShowRecipeActivity.class);
+                view.getContext().startActivity(Intent);
+            }
+        });
     }
 
     @Override
@@ -56,5 +70,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             name.setText(item);
         }
     }
-    
+
 }
