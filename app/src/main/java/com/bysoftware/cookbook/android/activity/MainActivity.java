@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity
         createAdapter();
     }
 
-    public void checkLogin(){
+    public void checkLogin() {
         // Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void createAdapter(){
+    public void createAdapter() {
         //adapter
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -115,19 +115,13 @@ public class MainActivity extends AppCompatActivity
         FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = mDatabase.getReference("recipes");
 
-
-
         myRef.orderByChild("recipeName").addValueEventListener(new ValueEventListener() {
-
-
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot)
-            {
-
-
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 ArrayList<String> lst = new ArrayList<String>();
-                for(DataSnapshot dsp : dataSnapshot.getChildren()){
-                    lst.add(String.valueOf(dsp.child("recipeName").getValue())); //add result into array list
+                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                    lst.add(String.valueOf(dsp.child("recipeName").getValue()));
+                    lst.add(String.valueOf(dsp.getKey()));
                 }
                 recyclerView.setAdapter(new RecyclerViewAdapter(lst));
             }
@@ -138,8 +132,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
-
-
 
     @Override
     public void onBackPressed() {
@@ -214,12 +206,11 @@ public class MainActivity extends AppCompatActivity
 
 
                 @Override
-                public void onDataChange(DataSnapshot dataSnapshot)
-                {
+                public void onDataChange(DataSnapshot dataSnapshot) {
 
 
                     ArrayList<String> lst = new ArrayList<String>();
-                    for(DataSnapshot dsp : dataSnapshot.getChildren()){
+                    for (DataSnapshot dsp : dataSnapshot.getChildren()) {
                         lst.add(String.valueOf(dsp.child("recipeName").getValue())); //add result into array list
                     }
                     recyclerView.setAdapter(new RecyclerViewAdapter(lst));
@@ -252,11 +243,12 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    private class GetDataFromFirebase extends AsyncTask<Void,Void,Boolean> {
+    private class GetDataFromFirebase extends AsyncTask<Void, Void, Boolean> {
         @Override
         protected Boolean doInBackground(Void... voids) {
             return false;
         }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();

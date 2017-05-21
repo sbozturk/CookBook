@@ -1,6 +1,9 @@
 package com.bysoftware.cookbook.android.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Window;
@@ -41,12 +44,12 @@ public class ShowRecipeActivity extends AppCompatActivity {
         reloadFirebase();
     }
 
-    public void reloadFirebase (){
-
-        //TODO: Buraları düzelt
-
+    public void reloadFirebase() {
         mDatabase = FirebaseDatabase.getInstance().getReference("recipes");
-        mDatabase.child("-KkaCd3-dLp7gq3GfYXl").addValueEventListener(new ValueEventListener() {
+        Intent item = getIntent();
+        Bundle key = item.getExtras();
+        String recipeID = (String) key.get("key");
+        mDatabase.child(recipeID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Recipe recipe = dataSnapshot.getValue(Recipe.class);
@@ -67,4 +70,8 @@ public class ShowRecipeActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 }
