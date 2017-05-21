@@ -228,9 +228,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
             Intent intent = new Intent(getApplicationContext(), ShowRecipeActivity.class);
             startActivity(intent);
-
         } else if (id == R.id.nav_manage) {
-
+            Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {

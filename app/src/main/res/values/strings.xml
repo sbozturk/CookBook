@@ -10,11 +10,12 @@
     <string name="title_activity_show_recipe">Show Recipe</string>
     <string name="title_activity_base">Base</string>
     <string name="title_activity_sign_in">Sign In</string>
+    <string name="title_activity_message">Message</string>
     <string name="toastRecipe">Your recipe has been saved.</string>
-
 
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
+    <string name="sign_out">Sign Out</string>
 
     <string name="hello">Hello World!</string>
     <string name="recipeName">Recipe Name</string>
@@ -32,4 +33,10 @@
     <string name="communicate">Communicate</string>
     <string name="share">Share</string>
     <string name="send">Send</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="sendPhoto">Photo Camera</string>ü
+    <string name="select_picture_title">Get Photo From</string>
+    <string name="sendPhotoGallery">Photo Gallery</string>
+    <string name="sendLocation">Send Location</string>
+    <string name="locationTo">Location To</string>
 </resources>
