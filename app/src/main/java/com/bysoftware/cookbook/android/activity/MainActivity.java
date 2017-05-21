@@ -42,7 +42,9 @@ public class MainActivity extends AppCompatActivity
 
     private RecyclerView recyclerView;
     private SharedPreferences mSharedPreferences;
+    private String mPhotoUrl;
     private String mUsername;
+
     // Firebase instance variables
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
@@ -80,8 +82,7 @@ public class MainActivity extends AppCompatActivity
             requestForSpecificPermission();
         }
 
-        //TODO: Düzelt burayı
-        //checkLogin();
+        checkLogin();
 
         createAdapter();
     }
@@ -97,6 +98,9 @@ public class MainActivity extends AppCompatActivity
             return;
         } else {
             mUsername = mFirebaseUser.getDisplayName();
+            if (mFirebaseUser.getPhotoUrl() != null) {
+                mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
+            }
         }
     }
 
