@@ -77,12 +77,12 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        checkLogin();
+
         //location permission check
         if (!checkIfAlreadyHavePermission()) {
             requestForSpecificPermission();
         }
-
-        checkLogin();
 
         createAdapter();
     }
@@ -168,60 +168,12 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+        // Handle navigation view item clicks here.s
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            setContentView(R.layout.activity_main);
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
-
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-            drawer.setDrawerListener(toggle);
-            toggle.syncState();
-
-            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-            navigationView.setNavigationItemSelectedListener(this);
-
-            FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(getApplicationContext(), AddRecipeActivity.class);
-                    startActivity(intent);
-                }
-            });
-            //adapter
-            recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-            recyclerView.setHasFixedSize(true);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            new GetDataFromFirebase().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
-            // Read from the database
-            FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-            DatabaseReference myRef = mDatabase.getReference("recipes");
-            myRef.orderByChild("recipeName").addValueEventListener(new ValueEventListener() {
-
-
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                    ArrayList<String> lst = new ArrayList<String>();
-                    for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                        lst.add(String.valueOf(dsp.child("recipeName").getValue())); //add result into array list
-                    }
-                    recyclerView.setAdapter(new RecyclerViewAdapter(lst));
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    System.out.println("Failed to read value." + databaseError.toException());
-                }
-            });
-
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_map) {
             Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
             startActivity(intent);
