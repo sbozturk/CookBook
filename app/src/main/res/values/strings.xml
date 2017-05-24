@@ -29,11 +29,7 @@
 
     <string name="home">Home</string>
     <string name="map">Map</string>
-    <string name="slideshow">Slideshow</string>
-    <string name="tools">Tools</string>
-    <string name="communicate">Communicate</string>
-    <string name="share">Share</string>
-    <string name="send">Send</string>
+    <string name="chat">Chat</string>
     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="sendPhoto">Photo Camera</string>ü
     <string name="select_picture_title">Get Photo From</string>
