@@ -60,6 +60,11 @@
             android:name=".activity.MessageActivity"
             android:label="@string/title_activity_message" />
 
+        <activity
+            android:name=".activity.FullScreenImageActivity"
+            android:label="@string/title_activity_full_screen_image"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>

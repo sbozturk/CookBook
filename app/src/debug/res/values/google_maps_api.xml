@@ -21,6 +21,9 @@
     string in this file.
     -->
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
-        AIzaSyDZZ3fQ9gRZyH2sHQCkpcq3L-bIqZxGWjc
+        AIzaSyAobsGtiyEPcgESo9iaXWnZWXD_V81p7KU
     </string>
+
+    <!--Yücel API Key: AIzaSyAobsGtiyEPcgESo9iaXWnZWXD_V81p7KU -->
+    <!--Buğra API Key: AIzaSyDZZ3fQ9gRZyH2sHQCkpcq3L-bIqZxGWjc -->
 </resources>

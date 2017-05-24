@@ -11,6 +11,7 @@
     <string name="title_activity_base">Base</string>
     <string name="title_activity_sign_in">Sign In</string>
     <string name="title_activity_message">Message</string>
+    <string name="title_activity_full_screen_image">Image</string>
     <string name="toastRecipe">Your recipe has been saved.</string>
 
     <string name="sign_in">Sign In</string>

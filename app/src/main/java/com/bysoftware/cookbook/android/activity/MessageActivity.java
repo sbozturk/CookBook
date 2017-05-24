@@ -101,7 +101,7 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
         setContentView(R.layout.activity_message);
 
         if (!Util.verificaConexao(this)){
-            Util.initToast(this,"Você não tem conexão com internet");
+            Util.initToast(this,"\n" + "You do not have an internet connection.");
             finish();
         }else{
              bindViews();
@@ -213,10 +213,6 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
         startActivity(intent);
     }
 
-
-    /**
-     * Envia o arvquivo para o firebase
-     */
     private void sendFileFirebase(StorageReference storageReference, final Uri file){
         if (storageReference != null){
             final String name = DateFormat.format("yyyy-MM-dd_hhmmss", new Date()).toString();
@@ -243,9 +239,6 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
 
     }
 
-    /**
-     * Envia o arvquivo para o firebase
-     */
     private void sendFileFirebase(StorageReference storageReference, final File file){
         if (storageReference != null){
             Uri photoURI = FileProvider.getUriForFile(MessageActivity.this,
@@ -273,9 +266,6 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
 
     }
 
-    /**
-     * Obter local do usuario
-     */
     private void locationPlacesIntent(){
         try {
             PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
@@ -285,9 +275,6 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
         }
     }
 
-    /**
-     * Enviar foto tirada pela camera
-     */
     private void photoCameraIntent(){
         String nomeFoto = DateFormat.format("yyyy-MM-dd_hhmmss", new Date()).toString();
         filePathImageCamera = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), nomeFoto+"camera.jpg");
@@ -299,9 +286,6 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
         startActivityForResult(it, IMAGE_CAMERA_REQUEST);
     }
 
-    /**
-     * Enviar foto pela galeria
-     */
     private void photoGalleryIntent(){
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -309,18 +293,12 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
         startActivityForResult(Intent.createChooser(intent, getString(R.string.select_picture_title)), IMAGE_GALLERY_REQUEST);
     }
 
-    /**
-     * Enviar msg de texto simples para chat
-     */
     private void sendMessageFirebase(){
         ChatModel model = new ChatModel(userModel,editTextMessageMessage.getText().toString(), Calendar.getInstance().getTime().getTime()+"",null);
         mFirebaseDatabaseReference.child(CHAT_REFERENCE).push().setValue(model);
         editTextMessageMessage.setText(null);
     }
 
-    /**
-     * Ler collections chatmodel Firebase
-     */
     private void lerMessagensFirebase(){
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
         final ChatFirebaseAdapter firebaseAdapter = new ChatFirebaseAdapter(mFirebaseDatabaseReference.child(CHAT_REFERENCE),userModel.getName(),this);
@@ -341,9 +319,6 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
         rvListMessage.setAdapter(firebaseAdapter);
     }
 
-    /**
-     * Verificar se usuario está logado
-     */
     private void verificaUsuarioLogado(){
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
@@ -356,9 +331,6 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
         }
     }
 
-    /**
-     * Vincular views com Java API
-     */
     private void bindViews(){
         contentRoot = findViewById(R.id.contentRoot);
         editTextMessageMessage = (EmojiconEditText)findViewById(R.id.editTextMessageMessage);
@@ -372,9 +344,6 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
         mLinearLayoutManager.setStackFromEnd(true);
     }
 
-    /**
-     * Sign Out no login
-     */
     private void signOut(){
         mFirebaseAuth.signOut();
         Auth.GoogleSignInApi.signOut(mGoogleApiClient);
@@ -382,25 +351,16 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
         finish();
     }
 
-    /**
-     * Checks if the app has permission to write to device storage
-     *
-     * If the app does not has permission then the user will be prompted to grant permissions
-     *
-     */
     public void verifyStoragePermissions() {
-        // Check if we have write permission
         int permission = ActivityCompat.checkSelfPermission(MessageActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
         if (permission != PackageManager.PERMISSION_GRANTED) {
-            // We don't have permission so prompt the user
             ActivityCompat.requestPermissions(
                     MessageActivity.this,
                     PERMISSIONS_STORAGE,
                     REQUEST_EXTERNAL_STORAGE
             );
         }else{
-            // we already have permission, lets go ahead and call camera intent
             photoCameraIntent();
         }
     }
@@ -410,10 +370,8 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
 
         switch (requestCode){
             case REQUEST_EXTERNAL_STORAGE:
-                // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted
                     photoCameraIntent();
                 }
                 break;
