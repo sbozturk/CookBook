@@ -90,7 +90,7 @@
 
         <TextView
             android:id="@+id/titleOrigin"
-            android:layout_width="280dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:paddingLeft="5dp"
@@ -101,7 +101,7 @@
 
         <TextView
             android:id="@+id/textViewOrigin"
-            android:layout_width="280dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:paddingLeft="10dp"
@@ -110,7 +110,7 @@
 
         <TextView
             android:id="@+id/titleIngredients"
-            android:layout_width="280dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:paddingLeft="5dp"
@@ -121,7 +121,7 @@
 
         <TextView
             android:id="@+id/textViewIngredients"
-            android:layout_width="280dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:paddingLeft="10dp"
@@ -130,7 +130,7 @@
 
         <TextView
             android:id="@+id/titleDirections"
-            android:layout_width="280dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:paddingLeft="5dp"
@@ -141,7 +141,7 @@
 
         <TextView
             android:id="@+id/textViewDirections"
-            android:layout_width="280dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:paddingLeft="10dp"
