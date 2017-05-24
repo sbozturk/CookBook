@@ -8,11 +8,13 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_add_recipe">Add Recipe</string>
     <string name="title_activity_show_recipe">Show Recipe</string>
+    <string name="title_activity_search">Search</string>
     <string name="title_activity_base">Base</string>
     <string name="title_activity_sign_in">Sign In</string>
     <string name="title_activity_message">Message</string>
     <string name="title_activity_full_screen_image">Image</string>
     <string name="toastRecipe">Your recipe has been saved.</string>
+    <string name="hintSearch">Search is case sensitive!</string>
 
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
@@ -25,11 +27,13 @@
     <string name="preparationTime">Preparation Time</string>
     <string name="origin">Origin of Recipe:</string>
     <string name="saveButton">Save</string>
+    <string name="searchButton">Search</string>
     <string name="prep">Prep</string>
 
     <string name="home">Home</string>
     <string name="map">Map</string>
     <string name="chat">Chat</string>
+    <string name="search">Search</string>
     <string name="alert">Alert</string>
     <string name="alert_message">Please fill all spaces!</string>
     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-3940256099942544/6300978111</string>

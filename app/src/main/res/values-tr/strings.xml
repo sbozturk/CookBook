@@ -29,4 +29,8 @@
     <string name="locationTo">Şu Konuma</string>
     <string name="alert">Uyarı</string>
     <string name="alert_message">Lütfen boş alanları doldurun!</string>
+    <string name="searchButton">Ara</string>
+    <string name="title_activity_search">Ara</string>
+    <string name="hintSearch">Arama büyük/küçük harf duyarlıdır!</string>
+    <string name="search">Ara</string>
 </resources>
