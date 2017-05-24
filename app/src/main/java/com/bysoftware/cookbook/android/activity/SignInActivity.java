@@ -24,10 +24,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-/**
- * Created by yucel on 12.05.2017.
- */
-
 public class SignInActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
 
@@ -98,7 +94,7 @@ public class SignInActivity extends AppCompatActivity implements GoogleApiClient
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             try {
                 Log.e(TAG, result.getStatus().getStatusMessage());
-            }catch (Exception e){
+            } catch (Exception e) {
                 Log.e(TAG, e.getMessage());
             }
 

@@ -16,10 +16,6 @@ import com.google.firebase.database.DatabaseReference;
 
 import hani.momanii.supernova_emoji_library.Helper.EmojiconTextView;
 
-/**
- * Created by yucel on 22.05.2017.
- */
-
 public class ChatFirebaseAdapter extends FirebaseRecyclerAdapter<ChatModel, ChatFirebaseAdapter.MyChatViewHolder> {
 
     private static final int RIGHT_MSG = 0;

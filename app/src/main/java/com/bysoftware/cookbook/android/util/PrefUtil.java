@@ -1,9 +1,5 @@
 package com.bysoftware.cookbook.android.util;
 
-/**
- * Created by sbozturk on 6.5.2017.
- */
-
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;

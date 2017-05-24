@@ -1,9 +1,5 @@
 package com.bysoftware.cookbook.android.activity;
 
-/**
- * Created by sbozturk on 6.5.2017.
- */
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -36,7 +32,6 @@ import java.util.Collections;
 import java.util.Locale;
 
 import static android.R.attr.value;
-
 
 public class AddRecipeActivity extends AppCompatActivity {
 
@@ -102,7 +97,6 @@ public class AddRecipeActivity extends AppCompatActivity {
     }
 
 
-
     public void addRecipe(View view) {
         String recipeName = editTextRecipeName.getText().toString();
         //lowercase to uppercase
@@ -115,7 +109,7 @@ public class AddRecipeActivity extends AppCompatActivity {
         String recipeDirections = editTextDirections.getText().toString();
         String recipePreparationTime = editTextPreparationTime.getText().toString();
         String recipeOrigin = spinnerCountry.getSelectedItem().toString();
-        if(recipeName.equals("")||recipeDirections.equals("")|| recipeIngredients.equals("")||recipePreparationTime.equals("")){
+        if (recipeName.equals("") || recipeDirections.equals("") || recipeIngredients.equals("") || recipePreparationTime.equals("")) {
             AlertDialog alertDialog = new AlertDialog.Builder(AddRecipeActivity.this).create();
             String alert = getResources().getString(R.string.alert);
             String alertMessage = getResources().getString(R.string.alert_message);
@@ -128,8 +122,7 @@ public class AddRecipeActivity extends AppCompatActivity {
                         }
                     });
             alertDialog.show();
-        }
-        else{
+        } else {
             //location value
             TrackGPS trackGPS = new TrackGPS(AddRecipeActivity.this);
             double latitude = trackGPS.getLatitude();

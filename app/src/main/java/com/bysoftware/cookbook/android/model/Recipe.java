@@ -1,9 +1,5 @@
 package com.bysoftware.cookbook.android.model;
 
-/**
- * Created by bugra on 7.5.2017.
- */
-
 public class Recipe {
     public String recipeName;
     public String recipeIngredients;

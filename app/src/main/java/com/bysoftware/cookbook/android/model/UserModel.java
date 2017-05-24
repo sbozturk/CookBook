@@ -2,10 +2,6 @@ package com.bysoftware.cookbook.android.model;
 
 import com.google.firebase.database.Exclude;
 
-/**
- * Created by yucel on 22.05.2017.
- */
-
 public class UserModel {
 
     private String id;
