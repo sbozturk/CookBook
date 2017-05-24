@@ -1,13 +1,18 @@
 package com.bysoftware.cookbook.android.activity;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -50,6 +55,7 @@ import com.google.firebase.storage.UploadTask;
 import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 
 import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
 import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
@@ -105,7 +111,7 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
             finish();
         }else{
              bindViews();
-            verificaUsuarioLogado();
+            verificaUsuarioLogin();
             mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .enableAutoManage(this, this)
                     .addApi(Auth.GOOGLE_SIGN_IN_API)
@@ -160,13 +166,7 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()){
-            case R.id.sendPhoto:
-                //TODO DÜZELT BURAYI BURADA PATLYOR
-                verifyStoragePermissions();
-//                photoCameraIntent();
-                break;
             case R.id.sendPhotoGallery:
                 photoGalleryIntent();
                 break;
@@ -177,7 +177,6 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
                 signOut();
                 break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -275,17 +274,6 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
         }
     }
 
-    private void photoCameraIntent(){
-        String nomeFoto = DateFormat.format("yyyy-MM-dd_hhmmss", new Date()).toString();
-        filePathImageCamera = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), nomeFoto+"camera.jpg");
-        Intent it = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        Uri photoURI = FileProvider.getUriForFile(MessageActivity.this,
-                BuildConfig.APPLICATION_ID + ".provider",
-                filePathImageCamera);
-        it.putExtra(MediaStore.EXTRA_OUTPUT,photoURI);
-        startActivityForResult(it, IMAGE_CAMERA_REQUEST);
-    }
-
     private void photoGalleryIntent(){
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -295,6 +283,7 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
 
     private void sendMessageFirebase(){
         ChatModel model = new ChatModel(userModel,editTextMessageMessage.getText().toString(), Calendar.getInstance().getTime().getTime()+"",null);
+        sendNotification(userModel.getName(),editTextMessageMessage.getText().toString());
         mFirebaseDatabaseReference.child(CHAT_REFERENCE).push().setValue(model);
         editTextMessageMessage.setText(null);
     }
@@ -319,7 +308,7 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
         rvListMessage.setAdapter(firebaseAdapter);
     }
 
-    private void verificaUsuarioLogado(){
+    private void verificaUsuarioLogin(){
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
         if (mFirebaseUser == null){
@@ -351,30 +340,25 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
         finish();
     }
 
-    public void verifyStoragePermissions() {
-        int permission = ActivityCompat.checkSelfPermission(MessageActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    private void sendNotification(String title, String body) {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                    MessageActivity.this,
-                    PERMISSIONS_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-            );
-        }else{
-            photoCameraIntent();
-        }
-    }
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
+                PendingIntent.FLAG_ONE_SHOT);
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentTitle(title)
+                .setContentText(body)
+                .setAutoCancel(true)
+                .setSound(defaultSoundUri)
+                .setContentIntent(pendingIntent);
 
-        switch (requestCode){
-            case REQUEST_EXTERNAL_STORAGE:
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    photoCameraIntent();
-                }
-                break;
-        }
+        NotificationManager notificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        notificationManager.notify(0, notificationBuilder.build());
     }
 }

@@ -20,7 +20,6 @@
     <string name="origin">Tarifin Kökeni</string>
     <string name="toastRecipe">Tarifiniz kaydedildi.</string>
     <string name="sendLocation">Konum gönder</string>
-    <string name="sendPhoto">Kamera</string>
     <string name="sendPhotoGallery">Galeriden Seç</string>
     <string name="sign_out">Oturumu Kapat</string>
     <string name="title_activity_message">Mesaj</string>
