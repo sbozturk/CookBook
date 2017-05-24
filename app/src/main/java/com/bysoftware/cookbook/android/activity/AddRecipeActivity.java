@@ -4,12 +4,14 @@ package com.bysoftware.cookbook.android.activity;
  * Created by sbozturk on 6.5.2017.
  */
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -99,26 +101,9 @@ public class AddRecipeActivity extends AppCompatActivity {
 
     }
 
+
+
     public void addRecipe(View view) {
-        saveFirebase();
-        editTextRecipeName.setText("");
-        editTextIngredients.setText("");
-        editTextDirections.setText("");
-        editTextPreparationTime.setText("");
-        Toast.makeText(getApplicationContext(), getString(R.string.toastRecipe), Toast.LENGTH_SHORT).show();
-
-        finish();
-    }
-
-    public void saveFirebase() {
-        //location value
-        TrackGPS trackGPS = new TrackGPS(AddRecipeActivity.this);
-        double latitude = trackGPS.getLatitude();
-        double longitude = trackGPS.getLongitude();
-
-
-        mDatabase = FirebaseDatabase.getInstance().getReference("recipes");
-        recipeID = mDatabase.push().getKey();
         String recipeName = editTextRecipeName.getText().toString();
         //lowercase to uppercase
         if (recipeName.length() <= 1) {
@@ -130,9 +115,38 @@ public class AddRecipeActivity extends AppCompatActivity {
         String recipeDirections = editTextDirections.getText().toString();
         String recipePreparationTime = editTextPreparationTime.getText().toString();
         String recipeOrigin = spinnerCountry.getSelectedItem().toString();
+        if(recipeName.equals("")||recipeDirections.equals("")|| recipeIngredients.equals("")||recipePreparationTime.equals("")){
+            AlertDialog alertDialog = new AlertDialog.Builder(AddRecipeActivity.this).create();
+            String alert = getResources().getString(R.string.alert);
+            String alertMessage = getResources().getString(R.string.alert_message);
+            alertDialog.setTitle(alert);
+            alertDialog.setMessage(alertMessage);
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        }
+        else{
+            //location value
+            TrackGPS trackGPS = new TrackGPS(AddRecipeActivity.this);
+            double latitude = trackGPS.getLatitude();
+            double longitude = trackGPS.getLongitude();
+            mDatabase = FirebaseDatabase.getInstance().getReference("recipes");
+            recipeID = mDatabase.push().getKey();
 
-        Recipe recipe = new Recipe(recipeName, recipeIngredients, recipeDirections, recipePreparationTime, recipeOrigin, longitude, latitude);
 
-        mDatabase.child(recipeID).setValue(recipe);
+            Recipe recipe = new Recipe(recipeName, recipeIngredients, recipeDirections, recipePreparationTime, recipeOrigin, longitude, latitude);
+
+            mDatabase.child(recipeID).setValue(recipe);
+            editTextRecipeName.setText("");
+            editTextIngredients.setText("");
+            editTextDirections.setText("");
+            editTextPreparationTime.setText("");
+            Toast.makeText(getApplicationContext(), getString(R.string.toastRecipe), Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 }
