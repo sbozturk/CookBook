@@ -20,10 +20,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import static android.content.ContentValues.TAG;
 
-/**
- * Created by bugra on 7.5.2017.
- */
-
 public class ShowRecipeActivity extends AppCompatActivity {
 
     public TextView textViewRecipeName, textViewIngredients, textViewDirections, textViewPreparationTime, textViewOrigin;

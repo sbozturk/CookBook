@@ -1,9 +1,5 @@
 package com.bysoftware.cookbook.android.activity;
 
-/**
- * Created by bugra on 20.5.2017.
- */
-
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;

@@ -18,10 +18,6 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bysoftware.cookbook.android.R;
 import com.bysoftware.cookbook.android.adapter.CircleTransform;
 
-/**
- * Created by yucel on 22.05.2017.
- */
-
 public class FullScreenImageActivity extends AppCompatActivity {
 
     private TouchImageView mImageView;
@@ -52,34 +48,34 @@ public class FullScreenImageActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == android.R.id.home){
+        if (id == android.R.id.home) {
             onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }
 
 
-    private void bindViews(){
+    private void bindViews() {
         progressDialog = new ProgressDialog(this);
         mImageView = (TouchImageView) findViewById(R.id.imageView);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ivUser = (ImageView)toolbar.findViewById(R.id.avatar);
-        tvUser = (TextView)toolbar.findViewById(R.id.title);
+        ivUser = (ImageView) toolbar.findViewById(R.id.avatar);
+        tvUser = (TextView) toolbar.findViewById(R.id.title);
     }
 
-    private void setValues(){
-        String nameUser,urlPhotoUser,urlPhotoClick;
+    private void setValues() {
+        String nameUser, urlPhotoUser, urlPhotoClick;
         nameUser = getIntent().getStringExtra("nameUser");
         urlPhotoUser = getIntent().getStringExtra("urlPhotoUser");
         urlPhotoClick = getIntent().getStringExtra("urlPhotoClick");
-        Log.i("TAG","Image received"+urlPhotoClick);
+        Log.i("TAG", "Image received" + urlPhotoClick);
         tvUser.setText(nameUser); // Name
-        Glide.with(this).load(urlPhotoUser).centerCrop().transform(new CircleTransform(this)).override(40,40).into(ivUser);
+        Glide.with(this).load(urlPhotoUser).centerCrop().transform(new CircleTransform(this)).override(40, 40).into(ivUser);
 
-        Glide.with(this).load( urlPhotoClick).asBitmap().override(640,640).fitCenter().into(new SimpleTarget<Bitmap>() {
+        Glide.with(this).load(urlPhotoClick).asBitmap().override(640, 640).fitCenter().into(new SimpleTarget<Bitmap>() {
 
             @Override
             public void onLoadStarted(Drawable placeholder) {
@@ -95,7 +91,7 @@ public class FullScreenImageActivity extends AppCompatActivity {
 
             @Override
             public void onLoadFailed(Exception e, Drawable errorDrawable) {
-                Toast.makeText(FullScreenImageActivity.this,"Error, please try again",Toast.LENGTH_LONG).show();
+                Toast.makeText(FullScreenImageActivity.this, "Error, please try again", Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
             }
         });

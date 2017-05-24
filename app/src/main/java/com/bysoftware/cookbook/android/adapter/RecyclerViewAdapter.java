@@ -14,10 +14,6 @@ import com.bysoftware.cookbook.android.activity.ShowRecipeActivity;
 
 import java.util.ArrayList;
 
-/**
- * Created by bugra on 13.5.2017.
- */
-
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
     private ArrayList<String> recipes = null;

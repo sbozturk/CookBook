@@ -60,10 +60,6 @@ import java.util.Map;
 import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
 import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
 
-/**
- * Created by yucel on 22.05.2017.
- */
-
 public class MessageActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener, ClickListenerChatFirebase {
 
     private static final int IMAGE_GALLERY_REQUEST = 1;
@@ -106,11 +102,11 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
-        if (!Util.verificaConexao(this)){
-            Util.initToast(this,"\n" + "You do not have an internet connection.");
+        if (!Util.verificaConexao(this)) {
+            Util.initToast(this, "\n" + "You do not have an internet connection.");
             finish();
-        }else{
-             bindViews();
+        } else {
+            bindViews();
             verificaUsuarioLogin();
             mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .enableAutoManage(this, this)
@@ -124,33 +120,33 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
 
         StorageReference storageRef = storage.getReferenceFromUrl(Util.URL_STORAGE_REFERENCE).child(Util.FOLDER_STORAGE_IMG);
 
-        if (requestCode == IMAGE_GALLERY_REQUEST){
-            if (resultCode == RESULT_OK){
+        if (requestCode == IMAGE_GALLERY_REQUEST) {
+            if (resultCode == RESULT_OK) {
                 Uri selectedImageUri = data.getData();
-                if (selectedImageUri != null){
-                    sendFileFirebase(storageRef,selectedImageUri);
-                }else{
+                if (selectedImageUri != null) {
+                    sendFileFirebase(storageRef, selectedImageUri);
+                } else {
                     //URI IS NULL
                 }
             }
-        }else if (requestCode == IMAGE_CAMERA_REQUEST){
-            if (resultCode == RESULT_OK){
-                if (filePathImageCamera != null && filePathImageCamera.exists()){
-                    StorageReference imageCameraRef = storageRef.child(filePathImageCamera.getName()+"_camera");
-                    sendFileFirebase(imageCameraRef,filePathImageCamera);
-                }else{
+        } else if (requestCode == IMAGE_CAMERA_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                if (filePathImageCamera != null && filePathImageCamera.exists()) {
+                    StorageReference imageCameraRef = storageRef.child(filePathImageCamera.getName() + "_camera");
+                    sendFileFirebase(imageCameraRef, filePathImageCamera);
+                } else {
                     //IS NULL
                 }
             }
-        }else if (requestCode == PLACE_PICKER_REQUEST){
+        } else if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(this, data);
-                if (place!=null){
+                if (place != null) {
                     LatLng latLng = place.getLatLng();
-                    MapModel mapModel = new MapModel(latLng.latitude+"",latLng.longitude+"");
-                    ChatModel chatModel = new ChatModel(userModel, Calendar.getInstance().getTime().getTime()+"",mapModel);
+                    MapModel mapModel = new MapModel(latLng.latitude + "", latLng.longitude + "");
+                    ChatModel chatModel = new ChatModel(userModel, Calendar.getInstance().getTime().getTime() + "", mapModel);
                     mFirebaseDatabaseReference.child(CHAT_REFERENCE).push().setValue(chatModel);
-                }else{
+                } else {
                     //PLACE IS NULL
                 }
             }
@@ -166,7 +162,7 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.sendPhotoGallery:
                 photoGalleryIntent();
                 break;
@@ -183,13 +179,13 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
-        Util.initToast(this,"Google Play Services error.");
+        Util.initToast(this, "Google Play Services error.");
     }
 
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.buttonMessageMessage:
                 sendMessageFirebase();
                 break;
@@ -197,49 +193,49 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
     }
 
     @Override
-    public void clickImageChat(View view, int position,String nameUser,String urlPhotoUser,String urlPhotoClick) {
-        Intent intent = new Intent(this,FullScreenImageActivity.class);
-        intent.putExtra("nameUser",nameUser);
-        intent.putExtra("urlPhotoUser",urlPhotoUser);
-        intent.putExtra("urlPhotoClick",urlPhotoClick);
+    public void clickImageChat(View view, int position, String nameUser, String urlPhotoUser, String urlPhotoClick) {
+        Intent intent = new Intent(this, FullScreenImageActivity.class);
+        intent.putExtra("nameUser", nameUser);
+        intent.putExtra("urlPhotoUser", urlPhotoUser);
+        intent.putExtra("urlPhotoClick", urlPhotoClick);
         startActivity(intent);
     }
 
     @Override
-    public void clickImageMapChat(View view, int position,String latitude,String longitude) {
-        String uri = String.format("geo:%s,%s?z=17&q=%s,%s", latitude,longitude,latitude,longitude);
+    public void clickImageMapChat(View view, int position, String latitude, String longitude) {
+        String uri = String.format("geo:%s,%s?z=17&q=%s,%s", latitude, longitude, latitude, longitude);
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
         startActivity(intent);
     }
 
-    private void sendFileFirebase(StorageReference storageReference, final Uri file){
-        if (storageReference != null){
+    private void sendFileFirebase(StorageReference storageReference, final Uri file) {
+        if (storageReference != null) {
             final String name = DateFormat.format("yyyy-MM-dd_hhmmss", new Date()).toString();
-            StorageReference imageGalleryRef = storageReference.child(name+"_gallery");
+            StorageReference imageGalleryRef = storageReference.child(name + "_gallery");
             UploadTask uploadTask = imageGalleryRef.putFile(file);
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Log.e(TAG,"onFailure sendFileFirebase "+e.getMessage());
+                    Log.e(TAG, "onFailure sendFileFirebase " + e.getMessage());
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Log.i(TAG,"onSuccess sendFileFirebase");
+                    Log.i(TAG, "onSuccess sendFileFirebase");
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                    FileModel fileModel = new FileModel("img",downloadUrl.toString(),name,"");
-                    ChatModel chatModel = new ChatModel(userModel,"",Calendar.getInstance().getTime().getTime()+"",fileModel);
+                    FileModel fileModel = new FileModel("img", downloadUrl.toString(), name, "");
+                    ChatModel chatModel = new ChatModel(userModel, "", Calendar.getInstance().getTime().getTime() + "", fileModel);
                     mFirebaseDatabaseReference.child(CHAT_REFERENCE).push().setValue(chatModel);
                 }
             });
-        }else{
+        } else {
             //IS NULL
         }
 
     }
 
-    private void sendFileFirebase(StorageReference storageReference, final File file){
-        if (storageReference != null){
+    private void sendFileFirebase(StorageReference storageReference, final File file) {
+        if (storageReference != null) {
             Uri photoURI = FileProvider.getUriForFile(MessageActivity.this,
                     BuildConfig.APPLICATION_ID + ".provider",
                     file);
@@ -247,25 +243,25 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Log.e(TAG,"onFailure sendFileFirebase "+e.getMessage());
+                    Log.e(TAG, "onFailure sendFileFirebase " + e.getMessage());
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Log.i(TAG,"onSuccess sendFileFirebase");
+                    Log.i(TAG, "onSuccess sendFileFirebase");
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                    FileModel fileModel = new FileModel("img",downloadUrl.toString(),file.getName(),file.length()+"");
-                    ChatModel chatModel = new ChatModel(userModel,"",Calendar.getInstance().getTime().getTime()+"",fileModel);
+                    FileModel fileModel = new FileModel("img", downloadUrl.toString(), file.getName(), file.length() + "");
+                    ChatModel chatModel = new ChatModel(userModel, "", Calendar.getInstance().getTime().getTime() + "", fileModel);
                     mFirebaseDatabaseReference.child(CHAT_REFERENCE).push().setValue(chatModel);
                 }
             });
-        }else{
+        } else {
             //IS NULL
         }
 
     }
 
-    private void locationPlacesIntent(){
+    private void locationPlacesIntent() {
         try {
             PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
             startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
@@ -274,23 +270,23 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
         }
     }
 
-    private void photoGalleryIntent(){
+    private void photoGalleryIntent() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, getString(R.string.select_picture_title)), IMAGE_GALLERY_REQUEST);
     }
 
-    private void sendMessageFirebase(){
-        ChatModel model = new ChatModel(userModel,editTextMessageMessage.getText().toString(), Calendar.getInstance().getTime().getTime()+"",null);
-        sendNotification(userModel.getName(),editTextMessageMessage.getText().toString());
+    private void sendMessageFirebase() {
+        ChatModel model = new ChatModel(userModel, editTextMessageMessage.getText().toString(), Calendar.getInstance().getTime().getTime() + "", null);
+        sendNotification(userModel.getName(), editTextMessageMessage.getText().toString());
         mFirebaseDatabaseReference.child(CHAT_REFERENCE).push().setValue(model);
         editTextMessageMessage.setText(null);
     }
 
-    private void lerMessagensFirebase(){
+    private void lerMessagensFirebase() {
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        final ChatFirebaseAdapter firebaseAdapter = new ChatFirebaseAdapter(mFirebaseDatabaseReference.child(CHAT_REFERENCE),userModel.getName(),this);
+        final ChatFirebaseAdapter firebaseAdapter = new ChatFirebaseAdapter(mFirebaseDatabaseReference.child(CHAT_REFERENCE), userModel.getName(), this);
         firebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
@@ -308,32 +304,32 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
         rvListMessage.setAdapter(firebaseAdapter);
     }
 
-    private void verificaUsuarioLogin(){
+    private void verificaUsuarioLogin() {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
-        if (mFirebaseUser == null){
+        if (mFirebaseUser == null) {
             startActivity(new Intent(this, SignInActivity.class));
             finish();
-        }else{
-            userModel = new UserModel(mFirebaseUser.getDisplayName(), mFirebaseUser.getPhotoUrl().toString(), mFirebaseUser.getUid() );
+        } else {
+            userModel = new UserModel(mFirebaseUser.getDisplayName(), mFirebaseUser.getPhotoUrl().toString(), mFirebaseUser.getUid());
             lerMessagensFirebase();
         }
     }
 
-    private void bindViews(){
+    private void bindViews() {
         contentRoot = findViewById(R.id.contentRoot);
-        editTextMessageMessage = (EmojiconEditText)findViewById(R.id.editTextMessageMessage);
-        buttonMessageMessage = (ImageView)findViewById(R.id.buttonMessageMessage);
+        editTextMessageMessage = (EmojiconEditText) findViewById(R.id.editTextMessageMessage);
+        buttonMessageMessage = (ImageView) findViewById(R.id.buttonMessageMessage);
         buttonMessageMessage.setOnClickListener(this);
-        buttonMessageEmoji = (ImageView)findViewById(R.id.buttonMessageEmoji);
-        emojIcon = new EmojIconActions(this,contentRoot,editTextMessageMessage,buttonMessageEmoji);
+        buttonMessageEmoji = (ImageView) findViewById(R.id.buttonMessageEmoji);
+        emojIcon = new EmojIconActions(this, contentRoot, editTextMessageMessage, buttonMessageEmoji);
         emojIcon.ShowEmojIcon();
-        rvListMessage = (RecyclerView)findViewById(R.id.messageRecyclerView);
+        rvListMessage = (RecyclerView) findViewById(R.id.messageRecyclerView);
         mLinearLayoutManager = new LinearLayoutManager(this);
         mLinearLayoutManager.setStackFromEnd(true);
     }
 
-    private void signOut(){
+    private void signOut() {
         mFirebaseAuth.signOut();
         Auth.GoogleSignInApi.signOut(mGoogleApiClient);
         startActivity(new Intent(this, SignInActivity.class));

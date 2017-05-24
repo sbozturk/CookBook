@@ -1,9 +1,5 @@
 package com.bysoftware.cookbook.android.model;
 
-/**
- * Created by yucel on 22.05.2017.
- */
-
 public class MapModel {
     private String latitude;
     private String longitude;
