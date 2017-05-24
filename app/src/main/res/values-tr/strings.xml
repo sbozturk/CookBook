@@ -2,7 +2,6 @@
 <resources>
     <string name="app_name">Yemek Kitabı</string>
     <string name="action_settings">Ayarlar</string>
-    <string name="communicate">İletişim</string>
     <string name="directions">Tarif</string>
     <string name="hello">Merhaba Dünya!</string>
     <string name="home">Ana Sayfa</string>
@@ -12,15 +11,21 @@
     <string name="preparationTime">Hazırlama Süresi</string>
     <string name="recipeName">Tarif İsmi</string>
     <string name="saveButton">Kaydet</string>
-    <string name="send">Gönder</string>
-    <string name="share">Paylaş</string>
     <string name="sign_in">Oturum Aç</string>
     <string name="sign_up">Kaydol</string>
-    <string name="slideshow">Slayt</string>
+    <string name="chat">Mesajlaşma</string>
     <string name="title_activity_add_recipe">Tarif Ekle</string>
     <string name="title_activity_maps">Harita</string>
     <string name="title_activity_show_recipe">Tarifi Göster</string>
-    <string name="tools">Araçlar</string>
     <string name="origin">Tarifin Kökeni</string>
     <string name="toastRecipe">Tarifiniz kaydedildi.</string>
+    <string name="sendLocation">Konum gönder</string>
+    <string name="sendPhoto">Kamera</string>
+    <string name="sendPhotoGallery">Galeriden Seç</string>
+    <string name="sign_out">Oturumu Kapat</string>
+    <string name="title_activity_message">Mesaj</string>
+    <string name="title_activity_full_screen_image">Resim</string>
+    <string name="title_activity_sign_in">Oturum Aç</string>
+    <string name="select_picture_title">Şuradan Al</string>
+    <string name="locationTo">Şu Konuma</string>
 </resources>
