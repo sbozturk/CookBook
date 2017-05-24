@@ -14,5 +14,9 @@
             android:id="@+id/nav_chat"
             android:icon="@drawable/emoji_1f5e3"
             android:title="@string/chat" />
+        <item
+            android:id="@+id/nav_search"
+            android:icon="@drawable/emoji_1f50d"
+            android:title="@string/search" />
     </group>
 </menu>
