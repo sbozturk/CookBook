@@ -1,6 +1,6 @@
 # CookBook
 
-Our vision is to teach different meals from different cultures to people and stop their thoughts about what to cook.
+Our vision is to teach people different meals from different cultures and stop their thoughts about what to cook.
 
 The application requires Android 5.0 or higher.
 
