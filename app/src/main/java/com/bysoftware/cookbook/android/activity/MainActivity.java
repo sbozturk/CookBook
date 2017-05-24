@@ -22,6 +22,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.bysoftware.cookbook.android.R;
 import com.bysoftware.cookbook.android.adapter.RecyclerViewAdapter;
@@ -83,7 +85,6 @@ public class MainActivity extends AppCompatActivity
         if (!checkIfAlreadyHavePermission()) {
             requestForSpecificPermission();
         }
-
         createAdapter();
     }
 
@@ -172,6 +173,9 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_chat) {
             Intent intent = new Intent(getApplicationContext(), MessageActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_search) {
+            Intent intent = new Intent(getApplicationContext(), SearchActivity.class);
             startActivity(intent);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
