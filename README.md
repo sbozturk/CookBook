@@ -1,21 +1,17 @@
 # CookBook
---------
+
 [![Platform](https://img.shields.io/badge/platform-Android-green.svg)](http://developer.android.com/index.html)
 
-# CookBook
 * Our vision is to teach people different meals from different cultures and stop their thoughts about what to cook.
 
 * The application requires Android 5.0 or higher.
 
 ## Authors
---------
 [Satuk Buğrahan ÖZTÜRK](https://github.com/sbozturk)
 
 [Yücel TERLEMEZOĞLU](https://github.com/YucelT94)
 
 ## License
---------
-
 ```
 Copyright 2017 Satuk Buğrahan ÖZTÜRK & Yücel Terlemezoğlu
 
