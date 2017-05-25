@@ -170,9 +170,6 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
             case R.id.sendPhotoGallery:
                 photoGalleryIntent();
                 break;
-            case R.id.sendLocation:
-                locationPlacesIntent();
-                break;
             case R.id.sign_out:
                 signOut();
                 break;

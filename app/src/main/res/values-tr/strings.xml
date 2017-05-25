@@ -19,8 +19,7 @@
     <string name="title_activity_show_recipe">Tarifi Göster</string>
     <string name="origin">Tarifin Kökeni</string>
     <string name="toastRecipe">Tarifiniz kaydedildi.</string>
-    <string name="sendLocation">Konum gönder</string>
-    <string name="sendPhotoGallery">Galeriden Seç</string>
+    <string name="sendPhotoGallery">Fotoğraf Gönder</string>
     <string name="sign_out">Oturumu Kapat</string>
     <string name="title_activity_message">Mesaj</string>
     <string name="title_activity_full_screen_image">Resim</string>
