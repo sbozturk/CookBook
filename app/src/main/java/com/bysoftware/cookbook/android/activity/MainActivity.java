@@ -57,10 +57,6 @@ public class MainActivity extends AppCompatActivity
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
 
-    private TextView textViewNavName, textViewNavMail;
-    private ImageView imageViewNav;
-    private View headerView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
