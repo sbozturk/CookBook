@@ -22,6 +22,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.bysoftware.cookbook.android.BuildConfig;
@@ -100,6 +102,8 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_message);
 
         if (!Util.verificaConexao(this)) {
@@ -279,7 +283,6 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
 
     private void sendMessageFirebase() {
         ChatModel model = new ChatModel(userModel, editTextMessageMessage.getText().toString(), Calendar.getInstance().getTime().getTime() + "", null);
-        sendNotification(userModel.getName(), editTextMessageMessage.getText().toString());
         mFirebaseDatabaseReference.child(CHAT_REFERENCE).push().setValue(model);
         editTextMessageMessage.setText(null);
     }
@@ -357,4 +360,5 @@ public class MessageActivity extends AppCompatActivity implements GoogleApiClien
 
         notificationManager.notify(0, notificationBuilder.build());
     }
+    //sendNotification(userModel.getName(), editTextMessageMessage.getText().toString());
 }
