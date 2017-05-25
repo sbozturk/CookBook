@@ -27,6 +27,8 @@ import android.widget.EditText;
 
 import com.bysoftware.cookbook.android.R;
 import com.bysoftware.cookbook.android.adapter.RecyclerViewAdapter;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity
     // Firebase instance variables
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,10 +157,17 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_sign_out) {
+           signOut();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void signOut(){
+        mFirebaseAuth.signOut();
+        startActivity(new Intent(this, SignInActivity.class));
+        finish();
+
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
