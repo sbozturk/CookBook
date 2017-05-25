@@ -1,3 +1,5 @@
+[![Platform](https://img.shields.io/badge/platform-Android-green.svg)](http://developer.android.com/index.html)
+
 # CookBook
 
 Our vision is to teach people different meals from different cultures and stop their thoughts about what to cook.
