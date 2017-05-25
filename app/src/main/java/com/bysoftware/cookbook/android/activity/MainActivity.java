@@ -11,6 +11,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,8 +25,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.bysoftware.cookbook.android.R;
+import com.bysoftware.cookbook.android.adapter.CircleTransform;
 import com.bysoftware.cookbook.android.adapter.RecyclerViewAdapter;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -46,13 +51,15 @@ public class MainActivity extends AppCompatActivity
 
     private RecyclerView recyclerView;
     private SharedPreferences mSharedPreferences;
-    private String mPhotoUrl;
-    private String mUsername;
+    private String mPhotoUrl, mUsername, mMail;
 
     // Firebase instance variables
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
-    private GoogleApiClient mGoogleApiClient;
+
+    private TextView textViewNavName, textViewNavMail;
+    private ImageView imageViewNav;
+    private View headerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,8 +109,11 @@ public class MainActivity extends AppCompatActivity
             return;
         } else {
             mUsername = mFirebaseUser.getDisplayName();
+            mMail = mFirebaseUser.getEmail();
+            Log.d("TEST: ", "User Name: " + mUsername + " Mail: " + mMail);
             if (mFirebaseUser.getPhotoUrl() != null) {
                 mPhotoUrl = mFirebaseUser.getPhotoUrl().toString();
+                Log.d("TEST: ", "Photo URL: " + mPhotoUrl);
             }
         }
     }
