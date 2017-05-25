@@ -1,3 +1,5 @@
+# CookBook
+--------
 [![Platform](https://img.shields.io/badge/platform-Android-green.svg)](http://developer.android.com/index.html)
 
 # CookBook
@@ -5,12 +7,16 @@
 
 * The application requires Android 5.0 or higher.
 
-### Contributed by
-* [Satuk Buğrahan ÖZTÜRK](https://github.com/sbozturk)
-* [Yücel TERLEMEZOĞLU](https://github.com/YucelT94)
+## Authors
+--------
+[Satuk Buğrahan ÖZTÜRK](https://github.com/sbozturk)
+
+[Yücel TERLEMEZOĞLU](https://github.com/YucelT94)
 
 ## License
-```sh
+--------
+
+```
 Copyright 2017 Satuk Buğrahan ÖZTÜRK & Yücel Terlemezoğlu
 
 Licensed under the Apache License, Version 2.0 (the "License");
